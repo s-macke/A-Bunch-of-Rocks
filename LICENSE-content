@@ -1,0 +1,25 @@
+A Bunch of Rocks: content licenses
+
+The code in this repository is MIT-licensed (see LICENSE). Everything else is licensed as follows.
+
+1. Our film content: CC BY-NC 4.0
+   Copyright (c) 2026 Sebastian Macke
+   https://creativecommons.org/licenses/by-nc/4.0/
+
+   Covers the narration scripts (docs/script.md, docs/script.de.md), the screenplay (docs/screenplay.md), the shot list
+   (shots.yaml), the end credits (credits.md), the other documentation (README.md, AGENTS.md, docs/youtube.md), and the
+   film made from them (the video, its audio tracks, subtitles and thumbnail).
+
+   These are an adaptation of xkcd #505 "A Bunch of Rocks" by Randall Munroe (https://xkcd.com/505/), which is licensed
+   under CC BY-NC 2.5. Because of that, they may be shared and adapted with credit, but not used commercially.
+   Credit: "A Bunch of Rocks" film by Sebastian Macke (https://github.com/s-macke/A-Bunch-of-Rocks), after xkcd #505 by
+   Randall Munroe.
+
+2. Third-party material: under its own license
+   - a_bunch_of_rocks.png, and the story and signature lines of the narration: xkcd #505 by Randall Munroe,
+     CC BY-NC 2.5 (https://creativecommons.org/licenses/by-nc/2.5/, https://xkcd.com/license.html)
+   - fonts/xkcd-script.ttf, fonts/xkcd.otf: github.com/ipython/xkcd-font, CC BY-NC 3.0 (see fonts/LICENSE)
+   - Narration voice, music and sound effects in the film: generated with the ElevenLabs API, under the ElevenLabs terms
+     of service (non-commercial use). The generated audio is not part of this repository.
+
+This is a non-commercial fan adaptation and is not affiliated with or endorsed by xkcd.

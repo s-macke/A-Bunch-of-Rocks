@@ -1,0 +1,120 @@
+<title>A Bunch of Rocks Storyboard</title>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;600;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sketchbook on the desert floor; a proportional shot strip, then one row per shot (frames left, words right) */
+:root {
+  --paper: #e9e4da; --sheet: #f4f1ea; --ink: #282426; --ink-soft: #5d5652;
+  --sand: #c79a63; --sky: #8fa3a6; --rule: #d3cabc; --star: #a5642c;
+  --a0: #b8b2a8; --a1: #c9a370; --a2: #9c8b6e; --a3: #5d6c8c; --a4: #a88e7c; --a5: #b8b2a8;
+  --display: "Shantell Sans", "Comic Neue", "Segoe Print", system-ui, sans-serif;
+  --body: "Literata", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #191c22; --sheet: #22262d; --ink: #ece6dc; --ink-soft: #aaa49b;
+  --sand: #d8ab72; --sky: #8ea4b0; --rule: #363b44; --star: #e2a35e;
+  --a0: #4a4d52; --a1: #8a6e47; --a2: #6f6450; --a3: #4f5f86; --a4: #7a6656; --a5: #4a4d52; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #191c22; --sheet: #22262d; --ink: #ece6dc; --ink-soft: #aaa49b;
+  --sand: #d8ab72; --sky: #8ea4b0; --rule: #363b44; --star: #e2a35e;
+  --a0: #4a4d52; --a1: #8a6e47; --a2: #6f6450; --a3: #4f5f86; --a4: #7a6656; --a5: #4a4d52; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--paper); color: var(--ink); font: 16px/1.55 var(--body); margin: 0; padding-inline: 16px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 40px 80px; }
+a { color: inherit }
+.tc, .num, .db, .eyebrow { font-family: var(--mono); font-variant-numeric: tabular-nums }
+
+.top { display: grid; gap: 14px; margin-bottom: 28px }
+.top .eyebrow { margin: 0; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft) }
+h1 { font: 800 clamp(34px, 6vw, 62px)/1.02 var(--display); margin: 0; letter-spacing: -.01em; text-wrap: balance }
+.lede { max-width: 62ch; margin: 0; color: var(--ink-soft) }
+.facts { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 4px 0 0; padding: 0; list-style: none; font: 14px var(--mono) }
+.facts b { font-weight: 500 }
+
+.strip { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper);
+  padding-block: 10px; margin-bottom: 36px; border-bottom: 1px solid var(--rule) }
+.strip-inner { display: flex; gap: 3px; min-width: 0 }
+.strip-act { display: grid; gap: 4px; min-width: 0 }
+.strip-label { font: 600 12px var(--display); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.segs { display: flex; gap: 1px; height: 26px }
+.seg { flex-basis: 0; min-width: 2px; background: var(--c); text-decoration: none; display: grid; place-items: center; overflow: hidden }
+.seg span { font: 10px var(--mono); color: var(--ink); opacity: .75; white-space: nowrap }
+.seg:hover, .seg:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px }
+.a0 { --c: var(--a0) } .a1 { --c: var(--a1) } .a2 { --c: var(--a2) } .a3 { --c: var(--a3) } .a4 { --c: var(--a4) } .a5 { --c: var(--a5) }
+.a3 .seg span { color: var(--sheet) }
+
+.act { display: grid; gap: 22px; margin-bottom: 56px }
+.act-head { display: grid; gap: 6px; padding-top: 18px; border-top: 6px solid var(--c) }
+.act-head .eyebrow { margin: 0; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft) }
+h2 { font: 800 clamp(26px, 4vw, 38px)/1.1 var(--display); margin: 0; text-wrap: balance }
+.act-meta { display: flex; flex-wrap: wrap; gap: 8px 32px; margin: 4px 0 0 }
+.act-meta div { flex: 1 1 280px; min-width: 0 }
+.act-meta dt { font: 600 12px var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft) }
+.act-meta dd { margin: 0 }
+
+.shot { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 22px;
+  background: var(--sheet); padding: 16px; border-radius: 3px; box-shadow: 0 1px 0 var(--rule) }
+.frames { margin: 0; display: grid; gap: 6px; min-width: 0 }
+.frames .main { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border: 1px solid var(--rule) }
+.thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px }
+.thumb { padding: 0; border: 2px solid transparent; background: none; cursor: pointer; opacity: .6; transition: opacity .15s }
+.thumb img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover }
+.thumb.on { border-color: var(--ink); opacity: 1 }
+.thumb:hover { opacity: 1 }
+.thumb:focus-visible { outline: 2px solid var(--sand); outline-offset: 2px }
+.info { display: grid; align-content: start; gap: 12px; min-width: 0 }
+.slate { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px }
+.slate .num { font-size: 22px; font-weight: 500 }
+.slate .scene { font: 600 17px var(--display) }
+.slate .tc { font-size: 13px; color: var(--ink-soft); margin-left: auto }
+.note { margin: 0; font-size: 14px; color: var(--ink-soft); max-width: 60ch }
+.words { display: grid; gap: 10px }
+.dir { margin: 0; font: italic 14px/1.45 var(--body); color: var(--ink-soft); padding-left: 12px; border-left: 2px dotted var(--rule) }
+.line { margin: 0; display: grid; gap: 4px }
+.line p { margin: 0; font-size: 18px; line-height: 1.5 }
+.line p::before { content: "\201C" } .line p::after { content: "\201D" }
+.tag { font: 12px var(--mono); color: var(--sky); justify-self: start }
+.tag::before { content: "[" } .tag::after { content: "]" }
+.tag + .tag { margin-top: -4px }
+.sig p { font-weight: 600 }
+.star { font: 600 12px var(--display); color: var(--star); letter-spacing: .03em }
+.silent { margin: 0; font: 600 14px var(--display); color: var(--ink-soft) }
+.sound { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none }
+.sound li { font: 12px var(--mono); padding: 3px 8px; border: 1px solid var(--rule); border-radius: 999px; color: var(--ink-soft) }
+.sound .db { opacity: .7 }
+footer { color: var(--ink-soft); font-size: 14px; border-top: 1px solid var(--rule); padding-top: 16px; max-width: 70ch }
+
+@media (max-width: 760px) {
+  .shot { grid-template-columns: minmax(0, 1fr); padding: 12px }
+  .strip-label { font-size: 10px }
+  .seg span { display: none }
+  .slate .tc { margin-left: 0 }
+}
+@media (prefers-reduced-motion: reduce) { .thumb { transition: none } html { scroll-behavior: auto } }
+html { scroll-behavior: smooth; scroll-padding-top: 80px }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Storyboard · short film after xkcd #505</p>
+    <h1>A Bunch of Rocks</h1>
+    <p class="lede">A man stuck forever in an endless desert lays rocks in rows, turns them into a computer, and simulates a universe that may be ours. Every shot of the current cut, in order, with three stills, the narration and the sound.</p>
+    <ul class="facts"><li><b>{{RUNTIME}}</b> runtime</li><li><b>{{SHOTS}}</b> shots</li><li><b>{{WORDS}}</b> spoken words</li><li>1280×720 · {{FPS}} fps</li></ul>
+  </header>
+  <nav class="strip" aria-label="Shots, to scale"><div class="strip-inner">{{STRIP}}</div></nav>
+  <main>{{BODY}}</main>
+  <footer>Based on xkcd #505 “A Bunch of Rocks” by Randall Munroe (<a href="https://xkcd.com/505/">xkcd.com/505</a>), CC BY-NC 2.5. Narration: “Drew – Deadpan Narrator” from the ElevenLabs voice library. Lines marked ★ are kept word for word from the comic. Stills are taken at 15%, 50% and 88% of each shot.</footer>
+</div>
+<script>
+document.querySelectorAll(".shot").forEach(function (shot) {
+  var main = shot.querySelector(".main");
+  shot.querySelectorAll(".thumb").forEach(function (b) {
+    b.addEventListener("click", function () {
+      main.src = b.dataset.src;
+      shot.querySelectorAll(".thumb").forEach(function (o) { o.classList.toggle("on", o === b); });
+    });
+  });
+});
+</script>

@@ -1,0 +1,280 @@
+# Shot list (D-22). Times are seconds within the act; voice lines refer to voice/timings.json.
+# voice: [{line: <index in act>, at: <shot-local start>}]; cues name words so events hit the voice (English `word`,
+#        German `de`; rocks/shots.py fits the picture to both recordings). A re-take replaces a line's act recording:
+#        take (English) or de_take (German), a file in voice/ (rocks/audio/narration.py RETAKES, recorded with
+#        scripts/make_audio.py --retake <file>); played from where its speech starts to where it ends (found in the
+#        audio; take_start/take_end or de_take_start/de_take_end override that).
+# sfx:   [{name: <key in rocks/audio/sfx.py LIBRARY>, at: <shot-local s>, [dur], [gain_db], [loop]}]
+act4:
+  - id: "4.1"
+    act: 4
+    scene: dust_room
+    duration: 12.5
+    voice: [{line: 0, at: 0.8, de_take: voice/de/act4_line0_take_b.mp3}]   # German: recorded after the end of Act 3
+    cues: {vanish: {line: 0, word: "vanish.", de: "verschwindet."},
+           nothing: {line: 0, word: "nothing.", de: "nichts."}}     # holds the German "…und dann nichts." back to the English beat
+    sfx:
+      - {name: room_tone, at: 0, dur: 12.5, gain_db: -14}
+      - {name: dust_flash, at: vanish, gain_db: -6}
+  - id: "4.2"
+    act: 4
+    scene: desert_hold_rock
+    duration: 5.5
+    voice: [{line: 1, at: 1.0}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 5.5, gain_db: -16}
+  - id: "4.3"
+    act: 4
+    scene: desert_wide
+    duration: 8.0
+    params: {hold: true}      # still holding the rock from 4.2
+    voice: [{line: 2, at: 0.4, take: voice/act4_line2_take_1.mp3}]   # re-take: new wording
+    sfx:
+      - {name: desert_wind, at: 0, dur: 8.0, gain_db: -13}
+  - id: "4.4"
+    act: 4
+    scene: desert_turn
+    duration: 5.0
+    voice: [{line: 3, at: 1.8}]
+    cues: {turn: {line: 3, word: "Oh.", de: "Ach"}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 5.0, gain_db: -18}
+  - id: "4.5"
+    act: 4
+    scene: lecture_hall
+    duration: 11.0
+    voice: [{line: 4, at: 0.8}]
+    sfx:
+      - {name: room_tone, at: 0, dur: 11.0, gain_db: -16}
+      - {name: clock_tick, at: 0.5, every: 1.0, until: 11.0, gain_db: -10}
+  - id: "4.6"
+    act: 4
+    scene: desert_walk_row
+    duration: 13.0
+    voice: [{line: 5, at: 0.8, de_take: voice/de/act4_line5_take_d.mp3}]   # German: slower
+    sfx:
+      - {name: desert_wind, at: 0, dur: 13.0, gain_db: -15}     # no fade: the wind carries on under the credits
+      # foot contacts of the walk cycle in desert_walk_row: 0.316 cycles/s -> first at 0.79 s, then every 1.58 s
+      - {name: footstep_sand, at: 0.79, every: 1.58, until: 12.0, gain_db: -12}
+
+act2:
+  - id: "2.1"
+    act: 2
+    scene: first_row
+    duration: 6.7
+    voice: [{line: 0, at: 0.5}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 6.7, gain_db: -13}
+      # placement cadence of first_row: a rock lands 0.9 s into every 1.3 s cycle
+      - {name: rock_set_down, at: 0.9, every: 1.3, until: 6.7, gain_db: -10}
+  - id: "2.2"
+    act: 2
+    scene: rule_side
+    duration: 15.2
+    rule_shot: true
+    voice: [{line: 1, at: 0.4}, {line: 2, at: 11.6}]
+    cues: {third: {line: 2, word: "third", de: "dritte"}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 15.2, gain_db: -16}
+      # rock clicks come from the scene itself (placements follow Rule 110), see out/act2_events.json
+  - id: "2.3"
+    act: 2
+    scene: rows_behind
+    duration: 9.0
+    voice: [{line: 3, at: 0.4}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 9.0, gain_db: -16}
+  - id: "2.4"
+    act: 2
+    scene: dune_view
+    duration: 11.0
+    voice: [{line: 4, at: 0.4}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 11.0, gain_db: -14}
+  - id: "2.5"
+    act: 2
+    scene: desert_wide
+    duration: 5.5
+    params: {walk: true}
+    voice: [{line: 5, at: 0.5}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 5.5, gain_db: -11}
+  - id: "2.6"
+    act: 2
+    scene: place_deadpan
+    duration: 6.0
+    voice: [{line: 6, at: 0.8}]
+    cues: {just: {line: 6, word: "Just", de: "Nur"}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 6.0, gain_db: -14}
+      - {name: rock_set_down, at: 1.55, gain_db: -8}
+  - id: "2.7"
+    act: 2
+    scene: week_of_walking
+    duration: 7.0
+    voice: [{line: 7, at: 0.5}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 7.0, gain_db: -12}
+  - id: "2.8"
+    act: 2
+    scene: sand_writing_side
+    duration: 12.6
+    voice: [{line: 8, at: 0.4, de_take: voice/de/act2_line8_take_a.mp3}]   # German: "Also legte ich die Physik in Steinen aus."
+    cues:
+      here1: {line: 8, word: "Here.", de: "Hier."}
+      not: {line: 8, word: "Not", de: "Nicht"}
+      here2: {line: 8, word: "Here.", de: "Hier.", occurrence: 2}
+      string: {line: 8, word: "string", de: "Kette"}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 12.6, gain_db: -16}
+  - id: "2.9"
+    act: 2
+    scene: sparks_meet
+    duration: 7.0
+    voice: [{line: 9, at: 0.4}]
+    cues: {bumping: {line: 9, word: "bumping", de: "aneinanderstoßen."}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 7.0, gain_db: -16}
+      - {name: dust_flash, at: bumping, gain_db: -8}
+
+act1:
+  - id: "1.1"
+    act: 1
+    scene: wake_up
+    duration: 12.5
+    voice: [{line: 0, at: 1.0}, {line: 1, at: 9.0}]      # line 1 after his first look around (8.6 s)
+    sfx:
+      - {name: desert_wind, at: 0, dur: 12.5, gain_db: -9}
+  - id: "1.2"
+    act: 1
+    scene: deadpan_stand
+    duration: 11.0
+    voice: [{line: 2, at: 0.4}]
+    cues: {nice: {line: 2, word: "nice,", de: "nett,"}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 11.0, gain_db: -10}
+  - id: "1.3"
+    act: 1
+    scene: long_walk
+    duration: 15.0
+    voice: [{line: 3, at: 0.4}]
+    cues: {following: {line: 3, word: "following", de: "folgt."}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 15.0, gain_db: -8}
+      # footsteps come from the scene (walk-cycle foot contacts), see out/act1_events.json
+  - id: "1.4"
+    act: 1
+    scene: goes_on_forever
+    duration: 10.0
+    voice: [{line: 4, at: 0.8, de_take: voice/de/act1_line4_take_e.mp3}]   # German: "Es geht ewig so weiter"
+    sfx:
+      - {name: desert_wind, at: 0, dur: 10.0, gain_db: -7}
+  - id: "1.5"
+    act: 1
+    scene: time_to_think
+    duration: 6.0
+    voice: [{line: 5, at: 0.3, de_take: voice/de/act1_line5_take_c.mp3}]   # German: "die ganze Zeit"
+    sfx:
+      - {name: desert_wind, at: 0, dur: 6.0, gain_db: -11}
+  - id: "1.6"
+    act: 1
+    scene: counting
+    duration: 7.5
+    voice: [{line: 6, at: 0.3, de_take: voice/de/act1_line6_take_h.mp3}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 7.5, gain_db: -12}
+  - id: "1.7"
+    act: 1
+    scene: physics
+    duration: 13.0
+    voice: [{line: 7, at: 0.2}]
+    cues: {fixed: {line: 7, word: "fixed", de: "Unterwegs"}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 13.0, gain_db: -12}
+  - id: "1.8"
+    act: 1
+    scene: patent_office
+    duration: 15.0
+    voice: [{line: 8, at: 0.4}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 15.0, gain_db: -9}      # no fade: the wind carries on into Act 2 (film mix)
+      - {name: rock_set_down, at: 10.3, gain_db: -14}
+
+act3:
+  - id: "3.1"
+    act: 3
+    scene: not_much
+    duration: 2.0
+    voice: [{line: 0, at: 0.4, de_take: voice/de/act3_line0_take_b.mp3}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 2.0, gain_db: -14}
+  - id: "3.2"
+    act: 3
+    scene: infinite
+    duration: 5.0
+    voice: [{line: 1, at: 0.6}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 5.0, gain_db: -12}
+  - id: "3.3"
+    act: 3
+    scene: more_particles
+    duration: 11.5
+    voice: [{line: 2, at: 0.4, de_take: voice/de/act3_line2_take_d.mp3}]
+    cues: {more: {line: 2, word: "more.", de: "mehr."}, stopped: {line: 2, word: "stopped", de: "hörte"}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 11.5, gain_db: -15}
+  - id: "3.4"
+    act: 3
+    scene: decided
+    duration: 6.1      # the re-take (D-33) + 2 s in the scene before the sentence starts (D-35)
+    voice: [{line: 3, at: 2.0, take: voice/act3_line3_take_a.mp3}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 6.1, gain_db: -17, fade_out: 1.5}
+  - id: "3.5"
+    act: 3
+    scene: big_bang
+    duration: 13.0
+    # the narration-free universe beat (D-27): music carries it
+  - id: "3.6"
+    act: 3
+    scene: eons_blur
+    duration: 8.3
+    voice: [{line: 4, at: 0.3}]
+    cues: {rows: {line: 4, word: "rows", de: "Reihen"}}
+    sfx:
+      - {name: desert_wind, at: 0, dur: 8.3, gain_db: -15}
+  - id: "3.7"
+    act: 3
+    scene: stars_dust_planets
+    duration: 10.0
+    voice: [{line: 5, at: 0.3}]
+    cues: {stars: {line: 5, word: "stars.", de: "Sternen."}, burned: {line: 5, word: "burned", de: "verglühten"}, planets: {line: 5, word: "planets.", de: "Planeten."}}
+  - id: "3.8"
+    act: 3
+    scene: life
+    duration: 6.5
+    voice: [{line: 6, at: 0.3}]
+  - id: "3.9"
+    act: 3
+    scene: stood_up
+    duration: 8.7      # +3 s breath before Act 4 (D-31), ends in a fade to paper
+    voice: [{line: 7, at: 0.3}]
+    sfx:
+      - {name: desert_wind, at: 0, dur: 8.7, gain_db: -20, fade_out: 2.5}
+
+act0:
+  - id: "0.1"
+    act: 0
+    scene: cold_open
+    duration: 15.0
+    sfx:
+      - {name: desert_wind, at: 0, dur: 15.0, gain_db: -6}      # the only sound in the cold open
+
+act5:
+  - id: "5.1"
+    act: 5
+    scene: credits
+    duration: 15.0
+    sfx:
+      - {name: desert_wind, at: 0, dur: 15.0, gain_db: -18, fade_out: 3}
+      # footsteps under the walking figure (0.8 scale, 40 px/s): contacts every ~1.9 s

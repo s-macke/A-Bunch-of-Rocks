@@ -1,0 +1,27 @@
+# secrets
+.env
+
+# Python
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# Generated folders: only an empty .gitkeep is committed, so the folder layout exists in a fresh checkout.
+# the film and everything rendered or mixed for it (scripts/make_film.py rebuilds it)
+film/*
+!film/.gitkeep
+build/*
+!build/.gitkeep
+cache/plates/*
+!cache/plates/.gitkeep
+# audio generated with ElevenLabs is not published (scripts/make_audio.py generates it with your own API key)
+voice/*
+!voice/.gitkeep
+music/*
+!music/.gitkeep
+cache/audio/*
+!cache/audio/.gitkeep
+
+# brainstorm documents (spec, decision log, style samples) stay local
+docs/brainstorm/

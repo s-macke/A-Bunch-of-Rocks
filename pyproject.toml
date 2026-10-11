@@ -1,0 +1,28 @@
+[project]
+name = "rocks"
+version = "0.1.0"
+description = "Short film adaptation of xkcd #505 'A Bunch of Rocks'"
+requires-python = ">=3.10"
+license = "MIT"                     # the code; the film content is CC BY-NC 4.0, see LICENSE-content
+dependencies = [
+    "numpy",
+    "scipy",
+    "pillow",
+    "skia-python",
+    "elevenlabs",
+    "requests",
+    "pyyaml",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["rocks*"]
