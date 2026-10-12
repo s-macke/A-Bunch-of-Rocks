@@ -228,10 +228,6 @@ cp .env.example .env                             # then put your API key into .e
 - `a_bunch_of_rocks.en.srt`, `a_bunch_of_rocks.de.srt`: subtitles.
 - `a_bunch_of_rocks.thumbnail.png`: the YouTube thumbnail (1280×720).
 
-On YouTube: upload the MP4 (YouTube plays only its first track, English). Then in YouTube Studio, under Languages,
-add German as a dub with the `.de.m4a` file, and add both `.srt` files under Subtitles. Title, description (English and
-German), chapters and upload settings are in [`docs/youtube.md`](docs/youtube.md).
-
 **Your film will sound different.** Voice and music generation is not repeatable: every run returns a new
 performance, with the same script, voice, prompts and settings as the original. The picture is drawn by code and
 comes out the same. But some things were tuned by ear to the original takes, so check them after generating:
