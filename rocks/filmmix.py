@@ -16,7 +16,7 @@ import numpy as np
 
 from .config import FPS, BUILD, FILM, ROOT
 from .files import atomic
-from .shots import ACTS, act_starts, load, recorded_langs
+from .shots import ACTS, CHAPTERS, act_starts, load, recorded_langs
 from .mix import stems, write_wav, decode, sfx_clip, loudnorm_measure, loudness, SR, TARGET_I, TARGET_TP
 
 
@@ -41,6 +41,16 @@ LANG_TAGS = {"en": ("eng", "English"), "de": ("deu", "Deutsch")}     # ISO 639-2
 TITLE = "A Bunch of Rocks"
 TAGS = ["-metadata", f"title={TITLE}", "-metadata", "artist=Sebastian Macke",          # what players show
         "-metadata", "comment=After xkcd #505 by Randall Munroe (CC BY-NC 2.5). https://github.com/s-macke/A-Bunch-of-Rocks"]
+
+
+def chapters(path, starts, total):
+    """An ffmpeg metadata file with one chapter per act (shots.CHAPTERS): players show them as chapter marks.
+    YouTube ignores them and takes its chapters from the description (docs/youtube.md)."""
+    ends = [starts[a + 1] if a + 1 in starts else total for a in ACTS]
+    text = ";FFMETADATA1\n" + "".join(f"[CHAPTER]\nTIMEBASE=1/1000\nSTART={round(starts[a] * 1000)}\n"
+                                       f"END={round(e * 1000)}\ntitle={CHAPTERS[a]}\n" for a, e in zip(ACTS, ends))
+    pathlib.Path(path).write_text(text)
+    return path
 
 
 def check_video(act, length):
@@ -107,6 +117,7 @@ def build(out_path):
     # picture: the six silent renders joined; one audio track per language, tagged, English the default
     vids = [BUILD / f"act{a}_silent.mp4" for a in ACTS]
     vin = sum((["-i", str(p)] for p in vids), []) + sum((["-i", str(mixes[lang])] for lang in langs), [])
+    vin += ["-i", str(chapters(BUILD / "film_chapters.txt", starts, total))]
     vgraph = "".join(f"[{k}:v]" for k in range(len(vids))) + f"concat=n={len(vids)}:v=1:a=0[v]"
     amap, meta = [], []
     for k, lang in enumerate(langs):
@@ -117,7 +128,7 @@ def build(out_path):
                  f"-disposition:a:{k}", "default" if k == 0 else "0"]
     with atomic(out_path) as tmp:                # a failed encode never leaves a broken film behind
         subprocess.run(["ffmpeg", "-y", "-v", "error", *vin, "-filter_complex", vgraph,
-                        "-map", "[v]", *amap, "-c:v", "libx264", "-preset", "slow", "-tune", "animation",
+                        "-map", "[v]", *amap, "-map_chapters", str(len(vids) + len(langs)), "-c:v", "libx264", "-preset", "slow", "-tune", "animation",
                         "-crf", "26", "-pix_fmt", "yuv420p", "-r", str(FPS), "-c:a", "aac", "-b:a", "128k", *meta,
                         *TAGS, "-movflags", "+faststart", "-shortest", str(tmp)], check=True)   # SSIM 0.993 vs crf 18
     for lang in langs[1:]:                       # YouTube takes the first track only; the others are uploaded as dubs

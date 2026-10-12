@@ -76,3 +76,7 @@ def test_youtube_chapters_match_the_film():
     times = re.findall(r"^(\d+:\d\d) ", (ROOT / "docs" / "youtube.md").read_text(), re.M)
     assert times == want * (len(times) // len(want)) and times, \
         f"chapters in docs/youtube.md: {times}; the acts start at {want} (python -m rocks.shots)"
+    from rocks.shots import CHAPTERS                 # the English titles are the film's own chapter marks
+    english = [f"{timecode(starts[a])} {CHAPTERS[a]}" for a in ACTS]
+    assert "\n".join(english) in (ROOT / "docs" / "youtube.md").read_text(), \
+        f"docs/youtube.md has no English chapter list {english} (rocks.shots.CHAPTERS)"

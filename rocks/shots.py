@@ -239,6 +239,11 @@ def act_starts():
     return starts, t
 
 
+# the chapter titles, as in docs/youtube.md (English); the film's MP4 carries them as chapter marks (rocks.filmmix)
+CHAPTERS = {0: "Cold open", 1: "Loneliness & discovery", 2: "The computer", 3: "Universe", 4: "Our world",
+            5: "Credits"}
+
+
 def timecode(t):
     """m:ss, as YouTube chapters write it."""
     return f"{int(t // 60)}:{int(t % 60):02d}"
@@ -247,5 +252,5 @@ def timecode(t):
 if __name__ == "__main__":                       # python -m rocks.shots: where each act starts (YouTube chapters)
     starts, total = act_starts()
     for a, t in starts.items():
-        print(f"act {a}  {timecode(t)}  ({t:.2f} s)")
+        print(f"{timecode(t)} {CHAPTERS[a]}  (act {a}, {t:.2f} s)")
     print(f"end    {timecode(total)}  ({total:.2f} s)")

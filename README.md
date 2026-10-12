@@ -1,9 +1,8 @@
 # A Bunch of Rocks: how to make a short film with an AI agent
 
-[![A Bunch of Rocks](docs/thumbnail.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
+[![A Bunch of Rocks](docs/thumbnail.jpg)](https://www.youtube.com/watch?v=WGMhXgNOMvQ)
 
-**▶ Watch the film on YouTube: [A Bunch of Rocks](https://www.youtube.com/watch?v=VIDEO_ID)** (English or German audio track)
-<!-- TODO: replace VIDEO_ID (twice) with the YouTube video id once the film is published -->
+**▶ Watch the film on YouTube: [A Bunch of Rocks](https://www.youtube.com/watch?v=WGMhXgNOMvQ)** (English or German audio track)
 
 Everyone can make animated films now. This repository shows how.
 
@@ -214,8 +213,8 @@ cp .env.example .env                             # then put your API key into .e
 
 `film/` then holds:
 
-- `a_bunch_of_rocks.mp4`: the film with two audio tracks, English (default) and German. Players like VLC or mpv
-  switch between them.
+- `a_bunch_of_rocks.mp4`: the film with two audio tracks, English (default) and German, and one chapter per act.
+  Players like VLC or mpv switch between the tracks and show the chapters.
 - `a_bunch_of_rocks.de.m4a`: the German audio alone, exactly as long as the film.
 - `a_bunch_of_rocks.en.srt`, `a_bunch_of_rocks.de.srt`: subtitles.
 - `a_bunch_of_rocks.thumbnail.png`: the YouTube thumbnail (1280×720).

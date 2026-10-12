@@ -25,3 +25,6 @@ cache/audio/*
 
 # brainstorm documents (spec, decision log, style samples) stay local
 docs/brainstorm/
+
+# editor settings
+.idea/
