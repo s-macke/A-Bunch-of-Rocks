@@ -1,12 +1,13 @@
 """Render the same key frame (figure laying a row of rocks in an endless desert)
 in four candidate art directions, fully procedurally with numpy + Pillow.
 
-Usage: .venv/bin/python scripts/experiments/style_samples.py <out_dir>
+Usage: .venv/bin/python scripts/experiments/style_samples.py <out_dir> [sheet.jpg]
+       sheet.jpg: the four side by side, labelled (the README's docs/style_samples.jpg)
 """
 import sys
 import pathlib
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter, ImageChops
+from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageFont
 from scipy.ndimage import gaussian_filter
 
 W, H = 1280, 720
@@ -353,10 +354,33 @@ def style_cutout():
     return finish(img)
 
 
+STYLES = [("1_sketchbook", "Sketchbook (chosen)"), ("2_moebius", "Moebius"), ("3_chalk", "Chalk"),
+          ("4_cutout", "Paper cut-out")]
+
+
+def sheet(out, path):
+    """The four samples in a 2 x 2 grid, each labelled, as one 1280 x 720 JPEG."""
+    font = ImageFont.truetype(str(pathlib.Path(__file__).resolve().parents[2] / "fonts" / "xkcd-script.ttf"), 30)
+    img = Image.new("RGB", (W, H), (244, 241, 234))
+    tw, th, gap = (W - 6) // 2, (H - 6) // 2, 6
+    for k, (name, label) in enumerate(STYLES):
+        x, y = (k % 2) * (tw + gap), (k // 2) * (th + gap)
+        img.paste(Image.open(out / f"{name}.png").convert("RGB").resize((tw, th), Image.LANCZOS), (x, y))
+        d = ImageDraw.Draw(img, "RGBA")
+        w = d.textlength(label, font=font)
+        d.rounded_rectangle((x + 10, y + th - 52, x + 30 + w, y + th - 10), 8, fill=(244, 241, 234, 225))
+        d.text((x + 20, y + th - 50), label, font=font, fill=(40, 36, 38))
+    img.save(path, quality=88, optimize=True)
+
+
 if __name__ == "__main__":
     out = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "style_samples")
     out.mkdir(parents=True, exist_ok=True)
-    for name, fn in [("1_sketchbook", style_sketchbook), ("2_moebius", style_moebius),
-                     ("3_chalk", style_chalk), ("4_cutout", style_cutout)]:
-        fn().save(out / f"{name}.png")
+    fns = {"1_sketchbook": style_sketchbook, "2_moebius": style_moebius, "3_chalk": style_chalk,
+           "4_cutout": style_cutout}
+    for name, _ in STYLES:
+        fns[name]().save(out / f"{name}.png")
         print("wrote", out / f"{name}.png")
+    if len(sys.argv) > 2:
+        sheet(out, sys.argv[2])
+        print("wrote", sys.argv[2])

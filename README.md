@@ -93,6 +93,11 @@ plan. So the film is drawn procedurally, in Python.
 Four looks were tried as still frames: sketchbook, Moebius, chalk and paper cut-out. The
 sketchbook look won: wobbly ink lines over muted watercolor washes on textured paper.
 
+![The four looks: sketchbook, Moebius, chalk, paper cut-out](docs/style_samples.jpg)
+
+The samples are reproducible: `scripts/experiments/style_samples.py <dir> docs/style_samples.jpg` renders them
+again, pixel for pixel as they were shown in the brainstorm.
+
 The first renderer, pure numpy, took **124 seconds per frame**, about 31 hours for the film. A rewrite with
 skia brought that to **under 0.2 seconds per frame**. The trick is to paint the expensive watercolor
 backgrounds once per shot and draw only the ink, rocks and figure on every frame.
@@ -103,6 +108,10 @@ backgrounds once per shot and draw only the ink, rocks and figure on every frame
   wobble kept at its original speed.
 - **A rigged stick figure.** A 2D skeleton with named poses (walk, kneel, write in the sand, look up), smooth
   blends between them, and inverse kinematics to put a hand exactly on a rock (`rocks/rig.py`).
+
+  ![The stick figure going through its named poses](docs/poses.gif)
+
+  The poses one after another, blended as in the film (`scripts/pose_gif.py docs/poses.gif`).
 - **A real computer.** The rows of rocks in Act 2 are a genuinely computed Rule 110 automaton, which is
   Turing-complete (`rocks/automaton.py`). In shot 2.2 he touches the three rocks above each spot before
   setting the next one, so you can see each row derive from the one before.
@@ -299,11 +308,14 @@ scripts/
   frame.py             one frame of one shot -> PNG
   test_shot.py         one shot with its sound, or an alternative scene for it -> MP4
   pose_sheet.py        all poses of the stick figure -> PNG
+  pose_gif.py          the poses in motion -> GIF (docs/poses.gif)
   experiments/         the early experiments: style samples and the renderer speed test
 tests/               Rule 110, and checks of the shot list and lettering
 docs/script.md       narration script; docs/script.de.md: the German translation
 docs/screenplay.md   the screenplay of the film
 docs/thumbnail.jpg   the title image above (the YouTube thumbnail, made by scripts/thumbnail.py)
+docs/style_samples.jpg  the four looks tried first (scripts/experiments/style_samples.py)
+docs/poses.gif      the figure's poses in motion (scripts/pose_gif.py)
 voice/, music/       generated audio (not in git; made by make_audio.py and make_music.py)
 cache/audio/         every API result and the spend ledger (not in git)
 fonts/               xkcd fonts and their license

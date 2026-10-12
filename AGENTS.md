@@ -51,6 +51,7 @@ scripts/
   storyboard.py          the storyboard page (layout in storyboard.html)
   thumbnail.py           the YouTube thumbnail: a frame of shot 4.6 with the title
   frame.py, test_shot.py, pose_sheet.py   debug tools: a frame, a shot with sound, the pose sheet
+  pose_gif.py            the poses in motion, as a GIF (docs/poses.gif)
   experiments/           early standalone experiments (style samples, renderer speed); not part of the build
 tests/                 pytest: Rule 110, shot list, lettering
 fonts/                 xkcd fonts and their LICENSE
@@ -67,6 +68,8 @@ docs/screenplay.md     the screenplay: scenes, action, narration, sound and musi
 docs/youtube.md        YouTube upload: titles and descriptions (English, German), chapters, settings, which file goes where;
                        update the chapter times when act lengths change
 docs/thumbnail.jpg     the README's title image: the YouTube thumbnail (scripts/thumbnail.py docs/thumbnail.jpg)
+docs/style_samples.jpg the README's image of the four looks tried first (scripts/experiments/style_samples.py)
+docs/poses.gif         the README's animation of the figure's poses (scripts/pose_gif.py docs/poses.gif)
 docs/brainstorm/       spec.md, decisions.md (facts F-n, decisions D-n; code comments cite them), style samples:
                        local only, never commit (see .gitignore)
 film/                  the finished film a_bunch_of_rocks.mp4 (audio tracks: English, German), a_bunch_of_rocks.de.m4a
